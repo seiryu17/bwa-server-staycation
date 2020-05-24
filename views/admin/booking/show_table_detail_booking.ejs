@@ -1,0 +1,60 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <a href=""><button class="btn btn-warning">Back</button></a>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="http://localhost:3000/<%= booking.payments.proofPayment %>" style="width: 100%; display:block" alt="image">
+            </div>
+
+            <div class="col-md-9">
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Name Member</th>
+                                <th>Total</th>
+                                <th>Bank From</th>
+                                <th>Title</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <%= booking.memberId.firstName %>
+                                        <%= booking.memberId.lastName %>
+                                </td>
+                                <td>
+                                    $
+                                    <%= booking.total %>
+                                </td>
+                                <td>
+                                    <%= booking.payments.bankFrom %>
+                                </td>
+                                <td>
+                                    <%= booking.itemId.title %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <% if( booking.payments.status == 'Proses' ){ %>
+                    <div class="row ml-1">
+                        <form action="/admin/booking/<%= booking.id %>/accept?_method=PUT" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"> Accept</i></button>
+                        </form>
+                        <form action="/admin/booking/<%= booking.id %>/reject?_method=PUT" method="POST">
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"> Reject</i></button>
+                        </form>
+                    </div>
+                    <% }else if( booking.payments.status == 'Accepted' ){ %>
+                        Booking sudah di accept
+                        <% } else if( booking.payments.status == 'Rejected' ){  %>
+                            Booking sudah di reject
+                            <% } %>
+            </div>
+        </div>
+    </div>
+</div>

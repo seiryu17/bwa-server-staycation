@@ -1,0 +1,43 @@
+<div class="tab-pane fade show active" id="edit-item" role="tabpanel" aria-labelledby=="home-tab">
+    <form action="/admin/item/<%= item.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="name">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="Enter Title" value="<%= item.title %>" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Price</label>
+                <input type="text" class="form-control" name="price" placeholder="Enter Price" value="<%= item.price %>" required>
+            </div>
+            <div class="form-group">
+                <label for="name">City</label>
+                <input type="text" class="form-control" name="city" placeholder="Enter City" value="<%= item.city %>" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Category</label>
+                <select name="categoryId" class="form-control">
+                    <option value="">Select Category</option>
+                    <% for(let i=0; i < category.length; i++){%>
+                        if(<%= item.categoryId._id %> == <%= category[i].id %>){
+                            <option value="<%= category[i].id %>" selected><%= category[i].name %></option>
+
+                        }
+                   <% } %>
+                 
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">Image</label>
+                <input type="file" class="form-control" name="image" multiple>
+            </div>
+            <div class="form-group">
+                <label for="name">Description</label>
+                <textarea name="about" class="form-control"><%= item.description %></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="/admin/item/"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+</div>
